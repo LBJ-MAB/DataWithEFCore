@@ -12,10 +12,21 @@ public class TaskDb : DbContext
         optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TaskDB;Trusted_Connection=True;")
             .UseSeeding((context, _) =>
             {
-                
+                var testTask = context.Set<TaskItem>().FirstOrDefault(t => t.Title == "test task");
+                if (testTask is null)
+                {
+                    context.Set<TaskItem>().Add(new TaskItem { Title = "test task" });
+                    context.SaveChanges();
+                }
             })
-            .UseAsyncSeeding();
+            .UseAsyncSeeding(async (context, _, cancellationToken) =>
+            {
+                var testTask = await context.Set<TaskItem>().FirstOrDefaultAsync(t => t.Title == "test task", cancellationToken);
+                if (testTask is null)
+                {
+                    context.Set<TaskItem>().Add(new TaskItem { Title = "test task" });
+                    await context.SaveChangesAsync(cancellationToken);
+                }
+            });
     }
-    
-    // include seeding!
 }
