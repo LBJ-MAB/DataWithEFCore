@@ -1,4 +1,6 @@
 ﻿using Domain;
+using FluentValidation;
+using FluentValidation.Results;
 using Infrastructure;
 using Microsoft.AspNetCore.Http;
 
@@ -7,22 +9,22 @@ namespace Application;
 public class TaskService : ITaskService
 {
     private ITaskRepository _repo;
-    public TaskService(ITaskRepository repo)
+    private IValidator<TaskItem> _validator;
+    public TaskService(ITaskRepository repo, IValidator<TaskItem> validator)
     {
         _repo = repo;
+        _validator = validator;
     }
     
     // add
     public async Task<IResult> AddTask(TaskItem task)
     {
-        try
+        ValidationResult validationResult = await _validator.ValidateAsync(task);
+        if (!validationResult.IsValid)
         {
-            await _repo.AddAsync(task);
+            return TypedResults.ValidationProblem(validationResult.ToDictionary());
         }
-        catch
-        {
-            return TypedResults.BadRequest("could not add task");
-        }
+        await _repo.AddAsync(task);
         return TypedResults.Created();
     }
     

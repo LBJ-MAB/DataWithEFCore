@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "61cMNPd4dCI=",
+  "dgSpecHash": "TyOwHB+yfAs=",
   "success": true,
   "projectFilePath": "C:\\Users\\Laurie.bassett-jones\\Projects\\DataWithEFCore\\Domain\\Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Laurie.bassett-jones\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -92,3 +92,4 @@ C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\DataWithEFCore.Api\obj\Deb
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\DataWithEFCore.Api\obj\Debug\net9.0\DataWithEFCore.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\DataWithEFCore.Api\obj\Debug\net9.0\DataWithEFCore.Api.sourcelink.json
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\DataWithEFCore.Api\obj\Debug\net9.0\DataWith.D0036342.Up2Date
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\DataWithEFCore.Api\bin\Debug\net9.0\FluentValidation.dll
