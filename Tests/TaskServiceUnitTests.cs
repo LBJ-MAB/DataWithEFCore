@@ -362,7 +362,133 @@ public class Tests
         // assert
         okResult!.Value.Should().BeEquivalentTo(task);
     }
+
+    [Test]
+    public async Task GetCompleteTasks_ShouldReturnOnlyTasksWithTrueStatus_WhenTasksAvailable()
+    {
+        // arrange - cannot add a task with true status
+        const int id = 1;
+        var task = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        await _service.AddTask(task);
+        await _service.UpdateTask(id, new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = true,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        });
+        var result = await _service.GetCompleteTasks();
+        var okResult = result as Ok<List<TaskItem>>;
+
+        // assert
+        okResult!.Value.Should().AllSatisfy(t =>
+        {
+            t.Status.Should().Be(true);
+        });
+    }
     
+    [Test]
+    public async Task GetCompleteTasks_ShouldNotReturnAnyTasksWithFalseStatus_WhenTasksAvailable()
+    {
+        // arrange - cannot add a task with true status
+        const int id = 1;
+        for (int i = 1; i <= 2; i++)
+        {
+            var task = new TaskItem
+            {
+                Id = i,
+                Title = $"task {i}",
+                Description = null,
+                Status = false,
+                Priority = null,
+                DueDate = null,
+                CreatedAt = new DateTime(),
+                UpdatedAt = null
+            };
+            await _service.AddTask(task);
+        }
+        
+
+        // act
+        await _service.UpdateTask(id, new TaskItem
+        {
+            Id = id,
+            Title = $"task {id}",
+            Description = null,
+            Status = true,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        });
+        var result = await _service.GetCompleteTasks();
+        var okResult = result as Ok<List<TaskItem>>;
+
+        // assert
+        okResult!.Value.Should().NotContain(t => t.Status == false);
+    }
+
+    [Test]
+    public async Task GetCompleteTasks_ShouldReturnBadRequest_WhenTasksNotAvailable()
+    {
+        // act
+        var result = await _service.GetCompleteTasks();
+
+        // assert
+        result.Should().BeOfType<BadRequest<string>>();
+    }
+
+    [Test]
+    public async Task GetCompleteTasks_ShouldReturnOk_WhenTasksAvailable()
+    {
+        // arrange - cannot add a task with true status
+        const int id = 1;
+        var task = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        await _service.AddTask(task);
+        await _service.UpdateTask(id, new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = true,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        });
+        var result = await _service.GetCompleteTasks();
+
+        // assert
+        result.Should().BeOfType<Ok<List<TaskItem>>>();
+    }
     
     
     
