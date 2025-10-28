@@ -1,6 +1,7 @@
 using Application;
 using Domain;
 using Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,12 +14,12 @@ builder.Services.AddScoped<ITaskService, TaskService>();
 var app = builder.Build();
 
 var tasks = app.MapGroup("/tasks");
-tasks.MapGet("/", async (TaskService service) => await service.GetAllTasks());
-tasks.MapGet("/{id}", async (int id, TaskService service) => await service.GetTaskById(id: id));
-tasks.MapGet("/complete", async (TaskService service) => await service.GetCompleteTasks());
-tasks.MapPost("/", async (TaskService service, TaskItem task) => await service.AddTask(task: task));
-tasks.MapPut("/{id}", async (TaskService service, int id, TaskItem inputTask) => await service.UpdateTask(id: id, inputTask: inputTask));
-tasks.MapDelete("/{id}", async (TaskService service, int id) => await service.DeleteTask(id: id));
+tasks.MapGet("/", async (ITaskService service) => await service.GetAllTasks());
+tasks.MapGet("/{id}", async (ITaskService service, int id) => await service.GetTaskById(id: id));
+tasks.MapGet("/complete", async (ITaskService service) => await service.GetCompleteTasks());
+tasks.MapPost("/", async (ITaskService service, [FromBody] TaskItem task) => await service.AddTask(task: task));
+tasks.MapPut("/{id}", async (ITaskService service, int id, [FromBody] TaskItem inputTask) => await service.UpdateTask(id: id, inputTask: inputTask));
+tasks.MapDelete("/{id}", async (ITaskService service, int id) => await service.DeleteTask(id: id));
 
 if (app.Environment.IsDevelopment())
 {

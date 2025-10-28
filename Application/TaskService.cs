@@ -23,7 +23,7 @@ public class TaskService : ITaskService
         {
             return TypedResults.BadRequest("could not add task");
         }
-        return TypedResults.NoContent();
+        return TypedResults.Created();
     }
     
     // get all
