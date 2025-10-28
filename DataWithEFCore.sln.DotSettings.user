@@ -1,0 +1,17 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=07f54131_002Df279_002D4372_002Db7f8_002D5ed765d4ea2e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AddTask_ShouldReturnValidationProblem_WhenTitleHasNoLength" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.AddTask_ShouldReturnValidationProblem_WhenTitleHasNoLength&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.AddTask_ShouldReturnValidationProblem_WhenStatusIsTrue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.AddTask_ShouldReturnCreated_WhenTitleHasLengthBetween1and20&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.AddTask_ShouldReturnValidationProblem_WhenTitleHasLengthGreaterThan20&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.AddTask_ShouldNotReturnValidationProblem_WhenTitleHasLengthBetween1and20&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.AddTask_ShouldNotReturnValidationProblem_WhenStatusIsFalse&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetAllTasks_ShouldReturnBadRequest_WhenNoTasksAvailable&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetAllTasks_ShouldNotReturnBadRequest_WhenTasksAvailable&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetAllTasks_ShouldReturnOk_WhenTasksAvailable&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetAllTasks_ShouldNotReturnOk_WhenTasksNotAvailable&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetAllTasks_ShouldReturnCorrectTask_WhenCalled&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetAllTasks_ShouldReturnCorrectLength_WhenTasksAvailable&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

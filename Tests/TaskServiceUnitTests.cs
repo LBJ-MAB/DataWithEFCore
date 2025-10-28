@@ -1,0 +1,314 @@
+﻿using Application;
+using Domain;
+using FluentAssertions;
+using FluentValidation;
+using Infrastructure;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
+
+namespace Tests;
+
+// define in memory database
+// test TaskService results with in memory database
+
+public class Tests
+{
+    private TaskDb _db;
+    private DbTaskRepository _repo;
+    private IValidator<TaskItem> _validator;
+    private TaskService _service;
+    
+    [SetUp]
+    public void Setup()
+    {
+        // create in-memory database for testing
+        var options = new DbContextOptionsBuilder<TaskDb>()
+            .UseInMemoryDatabase(databaseName: "TestDb")
+            .Options;
+        _db = new TaskDb(options);
+        
+        // organise db repo, fluent validator and task service
+        _repo = new DbTaskRepository(_db);
+        _validator = new TaskItemValidator();
+        _service = new TaskService(_repo, _validator);
+    }
+
+    [Test]
+    public async Task AddTask_ShouldReturnValidationProblem_WhenTitleHasNoLength()
+    {
+        // arrange
+        var taskWithNoTitle = new TaskItem
+        {
+            Id = 1,
+            Title = "",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        var result = await _service.AddTask(taskWithNoTitle);
+
+        // assert
+        result.Should().BeOfType<ValidationProblem>();
+    }
+    
+    [Test]
+    public async Task AddTask_ShouldReturnValidationProblem_WhenTitleHasLengthGreaterThan20()
+    {
+        // arrange
+        var task = new TaskItem
+        {
+            Id = 1,
+            Title = "the title of this task has a length greater than 20",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        var result = await _service.AddTask(task);
+
+        // assert
+        result.Should().BeOfType<ValidationProblem>();
+    }
+    
+    [Test]
+    public async Task AddTask_ShouldNotReturnValidationProblem_WhenTitleHasLengthBetween1and20()
+    {
+        // arrange
+        var task = new TaskItem
+        {
+            Id = 1,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        var result = await _service.AddTask(task);
+
+        // assert
+        result.Should().NotBeOfType<ValidationProblem>();
+    }
+    
+    [Test]
+    public async Task AddTask_ShouldReturnCreated_WhenTitleHasLengthBetween1and20()
+    {
+        // arrange
+        var task = new TaskItem
+        {
+            Id = 1,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        var result = await _service.AddTask(task);
+
+        // assert
+        result.Should().BeOfType<Created<TaskItem>>();
+    }
+    
+    [Test]
+    public async Task AddTask_ShouldReturnValidationProblem_WhenStatusIsTrue()
+    {
+        // arrange
+        var taskWithTrueStatus = new TaskItem
+        {
+            Id = 1,
+            Title = "test",
+            Description = null,
+            Status = true,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        var result = await _service.AddTask(taskWithTrueStatus);
+
+        // assert
+        result.Should().BeOfType<ValidationProblem>();
+    }
+    
+    [Test]
+    public async Task AddTask_ShouldNotReturnValidationProblem_WhenStatusIsFalse()
+    {
+        // arrange
+        var task = new TaskItem
+        {
+            Id = 1,
+            Title = "test",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        var result = await _service.AddTask(task);
+
+        // assert
+        result.Should().NotBeOfType<ValidationProblem>();
+    }
+
+    [Test]
+    public async Task GetAllTasks_ShouldReturnBadRequest_WhenNoTasksAvailable()
+    {
+        // arrange
+        
+        // act
+        var result = await _service.GetAllTasks();
+
+        // assert
+        result.Should().BeOfType<BadRequest<string>>();
+    }
+    
+    [Test]
+    public async Task GetAllTasks_ShouldNotReturnBadRequest_WhenTasksAvailable()
+    {
+        // arrange
+        var task = new TaskItem
+        {
+            Id = 1,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+        
+        // act
+        await _service.AddTask(task);
+        var result = await _service.GetAllTasks();
+
+        // assert
+        result.Should().NotBeOfType<BadRequest>();
+    }
+
+    [Test]
+    public async Task GetAllTasks_ShouldReturnOk_WhenTasksAvailable()
+    {
+        // arrange
+        var task = new TaskItem
+        {
+            Id = 1,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+        
+        // act
+        await _service.AddTask(task);
+        var result = await _service.GetAllTasks();
+
+        // assert
+        result.Should().BeOfType<Ok<List<TaskItem>>>();
+    }
+    
+    [Test]
+    public async Task GetAllTasks_ShouldNotReturnOk_WhenTasksNotAvailable()
+    {
+        // arrange
+        
+        // act
+        var result = await _service.GetAllTasks();
+
+        // assert
+        result.Should().NotBeOfType<Ok>();
+    }
+
+    [Test]
+    public async Task GetAllTasks_ShouldReturnCorrectTasks_WhenTasksAvailable()
+    {
+        // arrange
+        var task = new TaskItem
+        {
+            Id = 1,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+        var taskList = new List<TaskItem>();
+        taskList.Add(task);
+        
+        // act
+        await _service.AddTask(task);
+        var result = await _service.GetAllTasks();
+        var okResult = result as Ok<List<TaskItem>>;
+
+        // assert
+        okResult!.Value.Should().BeEquivalentTo(taskList);
+    }
+    
+    [Test]
+    public async Task GetAllTasks_ShouldReturnCorrectLength_WhenTasksAvailable()
+    {
+        // arrange
+        int numTasks = 3;
+        for (int i = 1; i <= numTasks; i++)
+        {
+            var task = new TaskItem
+            {
+                Id = i,
+                Title = $"task {i}",
+                Description = null,
+                Status = false,
+                Priority = null,
+                DueDate = null,
+                CreatedAt = new DateTime(),
+                UpdatedAt = null
+            };
+            await _service.AddTask(task);
+        }
+        
+        // act
+        var result = await _service.GetAllTasks();
+        var okResult = result as Ok<List<TaskItem>>;
+
+        // assert
+        okResult!.Value.Should().HaveCount(numTasks);
+    }
+    
+    
+    
+    
+    
+    
+    
+    [TearDown]
+    public void TearDown()
+    {
+        _db.Database.EnsureDeleted();
+        _db.Dispose();
+    }
+}

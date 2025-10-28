@@ -14,5 +14,4 @@ public class TaskDb : DbContext
         modelBuilder.Entity<TaskItem>().HasData(
             new TaskItem { Id = 1, Title = "Seed Data", Status = false});
     }
-    
 }
