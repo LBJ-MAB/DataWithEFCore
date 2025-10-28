@@ -3,12 +3,14 @@ using Domain;
 using FluentValidation;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<TaskDb>();
+builder.Services.AddDbContext<TaskDb>(opt => 
+    opt.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TaskDB;Trusted_Connection=True;"));
 builder.Services.AddScoped<ITaskRepository, DbTaskRepository>();
 builder.Services.AddScoped<IValidator<TaskItem>, TaskItemValidator>();
 builder.Services.AddScoped<ITaskService, TaskService>();

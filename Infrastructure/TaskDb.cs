@@ -5,28 +5,14 @@ namespace Infrastructure;
 
 public class TaskDb : DbContext
 {
+    public TaskDb (DbContextOptions<TaskDb> options) : base(options) { }
+    
     public DbSet<TaskItem> Tasks { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TaskDB;Trusted_Connection=True;")
-            .UseSeeding((context, _) =>
-            {
-                var testTask = context.Set<TaskItem>().FirstOrDefault(t => t.Title == "test task");
-                if (testTask is null)
-                {
-                    context.Set<TaskItem>().Add(new TaskItem { Title = "test task" });
-                    context.SaveChanges();
-                }
-            })
-            .UseAsyncSeeding(async (context, _, cancellationToken) =>
-            {
-                var testTask = await context.Set<TaskItem>().FirstOrDefaultAsync(t => t.Title == "test task", cancellationToken);
-                if (testTask is null)
-                {
-                    context.Set<TaskItem>().Add(new TaskItem { Title = "test task" });
-                    await context.SaveChangesAsync(cancellationToken);
-                }
-            });
+        modelBuilder.Entity<TaskItem>().HasData(
+            new TaskItem { Id = 1, Title = "Seed Data", Status = false});
     }
+    
 }
