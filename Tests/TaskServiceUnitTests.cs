@@ -298,7 +298,70 @@ public class Tests
         // assert
         okResult!.Value.Should().HaveCount(numTasks);
     }
-    
+
+    [Test]
+    public async Task GetTaskById_ShouldReturnBadRequest_WhenTaskNotAvailable()
+    {
+        // arrange
+        
+        // act
+        const int id = 1;
+        var result = await _service.GetTaskById(id);
+
+        // assert
+        result.Should().BeOfType<BadRequest<string>>();
+    }
+
+    [Test]
+    public async Task GetTaskById_ShouldReturnOk_WhenTaskAvailable()
+    {
+        // arrange
+        const int id = 1;
+        var task = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        await _service.AddTask(task);
+        var result = await _service.GetTaskById(id);
+
+        // assert
+        result.Should().BeOfType<Ok<TaskItem>>();
+    }
+
+    [Test]
+    public async Task GetTaskById_ShouldReturnCorrectTask_WhenTaskAvailable()
+    {
+        // arrange
+        const int id = 1;
+        var task = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+        
+        // act
+        await _service.AddTask(task);
+        var result = await _service.GetTaskById(id);
+        var okResult = result as Ok<TaskItem>;
+
+        // assert
+        okResult!.Value.Should().BeEquivalentTo(task);
+    }
     
     
     

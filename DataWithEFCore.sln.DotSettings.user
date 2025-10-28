@@ -13,5 +13,8 @@
     &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetAllTasks_ShouldNotReturnOk_WhenTasksNotAvailable&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetAllTasks_ShouldReturnCorrectTask_WhenCalled&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetAllTasks_ShouldReturnCorrectLength_WhenTasksAvailable&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetTaskById_ShouldReturnCorrectTask_WhenTaskAvailable&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetTaskById_ShouldReturnBadRequest_WhenTaskNotAvailable&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests.GetTaskById_ShouldReturnOk_WhenTaskAvailable&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
