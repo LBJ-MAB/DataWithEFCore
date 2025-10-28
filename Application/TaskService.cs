@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application;
 
-public class TaskService
+public class TaskService : ITaskService
 {
     private ITaskRepository _repo;
     public TaskService(ITaskRepository repo)
