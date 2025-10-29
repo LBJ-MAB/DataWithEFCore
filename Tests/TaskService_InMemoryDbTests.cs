@@ -8,6 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tests;
 
+// mock repository
+// assert that repo method is getting called
+// e.g for AddTask(), assert that _repo.AddAsync() is being called
+
 public class Tests
 {
     private TaskDb _db;
