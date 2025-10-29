@@ -8,9 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tests;
 
-// define in memory database
-// test TaskService results with in memory database
-
 public class Tests
 {
     private TaskDb _db;
@@ -222,9 +219,9 @@ public class Tests
             CreatedAt = new DateTime(),
             UpdatedAt = null
         };
+        await _service.AddTask(task);
         
         // act
-        await _service.AddTask(task);
         var result = await _service.GetAllTasks();
 
         // assert
@@ -260,9 +257,9 @@ public class Tests
         };
         var taskList = new List<TaskItem>();
         taskList.Add(task);
+        await _service.AddTask(task);
         
         // act
-        await _service.AddTask(task);
         var result = await _service.GetAllTasks();
         var okResult = result as Ok<List<TaskItem>>;
 
@@ -328,9 +325,9 @@ public class Tests
             CreatedAt = new DateTime(),
             UpdatedAt = null
         };
+        await _service.AddTask(task);
 
         // act
-        await _service.AddTask(task);
         var result = await _service.GetTaskById(id);
 
         // assert
@@ -353,9 +350,9 @@ public class Tests
             CreatedAt = new DateTime(),
             UpdatedAt = null
         };
+        await _service.AddTask(task);
         
         // act
-        await _service.AddTask(task);
         var result = await _service.GetTaskById(id);
         var okResult = result as Ok<TaskItem>;
 
@@ -379,8 +376,6 @@ public class Tests
             CreatedAt = new DateTime(),
             UpdatedAt = null
         };
-
-        // act
         await _service.AddTask(task);
         await _service.UpdateTask(id, new TaskItem
         {
@@ -393,6 +388,8 @@ public class Tests
             CreatedAt = new DateTime(),
             UpdatedAt = null
         });
+
+        // act
         var result = await _service.GetCompleteTasks();
         var okResult = result as Ok<List<TaskItem>>;
 
@@ -423,9 +420,6 @@ public class Tests
             };
             await _service.AddTask(task);
         }
-        
-
-        // act
         await _service.UpdateTask(id, new TaskItem
         {
             Id = id,
@@ -437,6 +431,8 @@ public class Tests
             CreatedAt = new DateTime(),
             UpdatedAt = null
         });
+
+        // act
         var result = await _service.GetCompleteTasks();
         var okResult = result as Ok<List<TaskItem>>;
 
@@ -447,6 +443,8 @@ public class Tests
     [Test]
     public async Task GetCompleteTasks_ShouldReturnBadRequest_WhenTasksNotAvailable()
     {
+        // arrange
+        
         // act
         var result = await _service.GetCompleteTasks();
 
@@ -470,8 +468,6 @@ public class Tests
             CreatedAt = new DateTime(),
             UpdatedAt = null
         };
-
-        // act
         await _service.AddTask(task);
         await _service.UpdateTask(id, new TaskItem
         {
@@ -484,15 +480,195 @@ public class Tests
             CreatedAt = new DateTime(),
             UpdatedAt = null
         });
+
+        // act
         var result = await _service.GetCompleteTasks();
 
         // assert
         result.Should().BeOfType<Ok<List<TaskItem>>>();
     }
+
+    [Test]
+    public async Task UpdateTask_ShouldReturnNoContent_WhenGivenTaskWithValidId()
+    {
+        // arrange
+        const int id = 1;
+        var initialTask = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+        await _service.AddTask(initialTask);
+        var updatedTask = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = "this task has been updated",
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        var result = await _service.UpdateTask(id, updatedTask);
+
+        // assert
+        result.Should().BeOfType<NoContent>();
+    }
+
+    [Test]
+    public async Task UpdateTask_ShouldNotReturnNoContent_WhenGivenTaskWithInvalidId()
+    {
+        // arrange
+        const int id = 1;
+        var initialTask = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+        await _service.AddTask(initialTask);
+        var updatedTask = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = "this task has been updated",
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        var result = await _service.UpdateTask(id+1, updatedTask);
+
+        // assert
+        result.Should().NotBeOfType<NoContent>(); 
+    }
     
-    
-    
-    
+    [Test]
+    public async Task UpdateTask_ShouldReturnBadRequest_WhenGivenTaskWithInvalidId()
+    {
+        // arrange
+        const int id = 1;
+        var initialTask = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+        await _service.AddTask(initialTask);
+        var updatedTask = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = "this task has been updated",
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+
+        // act
+        var result = await _service.UpdateTask(id+1, updatedTask);
+
+        // assert
+        result.Should().BeOfType<BadRequest<string>>(); 
+    }
+
+    [Test]
+    public async Task DeleteTask_ShouldReturnBadRequest_WhenGivenTaskWithInvalidId()
+    {
+        // arrange
+        
+        // act
+        var result = await _service.DeleteTask(1);
+
+        // assert
+        result.Should().BeOfType<BadRequest<string>>();
+    }
+
+    [Test]
+    public async Task DeleteTask_ShouldNotReturnBadRequest_WhenGivenTaskWithValidId()
+    {
+        // arrange
+        const int id = 1;
+        var task = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+        await _service.AddTask(task);
+        
+        // act
+        var result = await _service.DeleteTask(id);
+
+        // assert
+        result.Should().NotBeOfType<BadRequest<string>>();
+    }
+
+    [Test]
+    public async Task DeleteTask_ShouldReturnNoContent_WhenGivenTaskWithValidId()
+    {
+        // arrange
+        const int id = 1;
+        var task = new TaskItem
+        {
+            Id = id,
+            Title = "title",
+            Description = null,
+            Status = false,
+            Priority = null,
+            DueDate = null,
+            CreatedAt = new DateTime(),
+            UpdatedAt = null
+        };
+        await _service.AddTask(task);
+        
+        // act
+        var result = await _service.DeleteTask(id);
+
+        // assert
+        result.Should().BeOfType<NoContent>();
+    }
+
+    [Test]
+    public async Task DeleteTask_ShouldNotReturnNoContent_WhenGivenTaskWithInvalidId()
+    {
+        // arrange
+        
+        // act
+        var result = await _service.DeleteTask(1);
+
+        // assert
+        result.Should().NotBeOfType<NoContent>();
+    }
     
     [TearDown]
     public void TearDown()
