@@ -162,3 +162,5 @@ C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\App
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\Infrastructure.pdb
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\Domain.pdb
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\obj\Debug\net9.0\Tests.sourcelink.json
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\Castle.Core.dll
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\Moq.dll
