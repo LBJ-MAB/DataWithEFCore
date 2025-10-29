@@ -198,9 +198,9 @@ public class Tests
             CreatedAt = new DateTime(),
             UpdatedAt = null
         };
+        await _service.AddTask(task);
         
         // act
-        await _service.AddTask(task);
         var result = await _service.GetAllTasks();
 
         // assert
