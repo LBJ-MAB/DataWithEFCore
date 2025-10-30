@@ -1,0 +1,6 @@
+{
+  "Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Laurie.bassett-jones\\Projects\\DataWithEFCore\\Application",
+  "DataWithEFCore.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Laurie.bassett-jones\\Projects\\DataWithEFCore\\DataWithEFCore.Api",
+  "Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Laurie.bassett-jones\\Projects\\DataWithEFCore\\Domain",
+  "Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Laurie.bassett-jones\\Projects\\DataWithEFCore\\Infrastructure"
+}
