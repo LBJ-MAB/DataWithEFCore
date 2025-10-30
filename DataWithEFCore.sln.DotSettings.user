@@ -2,6 +2,25 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AType_002ECoreCLR_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E2_003Fresharper_002Dhost_003FSourcesCache_003F5cde391207de75962d7bacb899ca2bd3985c86911b152d185b58999a422bf0_003FType_002ECoreCLR_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=07f54131_002Df279_002D4372_002Db7f8_002D5ed765d4ea2e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AddTask_ShouldReturnValidationProblem_WhenTitleHasNoLength" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.Tests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.GetAllTasks_CallsRepositoryGetAllAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.GetTaskById_CallsRepositoryGetByIdAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.GetCompleteTasks_CallsRepositoryGetCompleteAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.AddTask_CallsRepositoryAddAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.AddTask_CallsRepositoryAddAsync_WhenValidTaskProvided&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.UpdateTask_CallsRepositoryGetByIdAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.UpdateTask_CallsRepositorySaveChangesAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.DeleteTask_CallsRepositoryDeleteAsync_WhenGivenValidTask&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.GetAllTasks_ReturnsOk_WhenTasksReturnedFromRepo&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.GetAllTasks_ReturnsBadRequest_WhenNoTasksReturnedFromRepo&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.GetTaskById_ReturnsOk_WhenValidIdGiven&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.GetTaskById_ReturnsBadRequest_WhenInvalidIdGiven&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.GetCompleteTasks_ReturnsOk_WhenTasksReturnedFromRepo&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.GetCompleteTasks_ReturnsBadRequest_WhenNoTasksReturnedFromRepo&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.AddTask_ReturnsCreated_WhenValidTaskGiven&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.AddTask_ReturnsValidationProblem_WhenValidatorReturnsFalse&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.UpdateTask_ReturnsBadRequest_WhenGetByIdAsyncReturnsNull&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.UpdateTask_ReturnsNoContent_WhenGetByIdAsyncReturnsTaskItem&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.DeleteTask_ReturnsBadRequest_WhenGetByIdAsyncReturnsNull&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.UnitTests.DeleteTask_ReturnsNoContent_WhenGetByIdAsyncReturnsTaskItem&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

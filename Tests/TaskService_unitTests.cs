@@ -5,14 +5,9 @@ using FluentValidation;
 using FluentValidation.Results;
 using Infrastructure;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 
 namespace Tests;
-
-// mock repository
-// assert that repo method is getting called
-// e.g for AddTask(), assert that _repo.AddAsync() is being called
 
 public class UnitTests
 {
@@ -143,7 +138,7 @@ public class UnitTests
     }
 
     [Test]
-    public async Task GetAllTasks_ReturnsOk_WhenTasksReturnedFromRepo()
+    public async Task GetAllTasks_ReturnsOk_WhenGetAllAsyncReturnsListOfTaskItems()
     {
         // arrange
         _mockRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(new List<TaskItem>
@@ -159,7 +154,7 @@ public class UnitTests
     }
 
     [Test]
-    public async Task GetAllTasks_ReturnsBadRequest_WhenNoTasksReturnedFromRepo()
+    public async Task GetAllTasks_ReturnsBadRequest_WhenGetAllAsyncReturnsEmptyList()
     {
         // arrange
         _mockRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(new List<TaskItem>());
@@ -172,35 +167,33 @@ public class UnitTests
     }
 
     [Test]
-    public async Task GetTaskById_ReturnsOk_WhenValidIdGiven()
+    public async Task GetTaskById_ReturnsOk_WhenGetByIdAsyncReturnsTaskItem()
     {
         // arrange
-        const int id = 1;
-        _mockRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync(new TaskItem());
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(new TaskItem());
         
         // act
-        var result = await _service.GetTaskById(id);
+        var result = await _service.GetTaskById(It.IsAny<int>());
         
         // assert
         result.Should().BeOfType<Ok<TaskItem>>();
     }
     
     [Test]
-    public async Task GetTaskById_ReturnsBadRequest_WhenInvalidIdGiven()
+    public async Task GetTaskById_ReturnsBadRequest_WhenGetByIdAsyncReturnsNull()
     {
         // arrange
-        const int id = 1;
-        _mockRepo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((TaskItem)null);
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((TaskItem)null);
         
         // act
-        var result = await _service.GetTaskById(id);
+        var result = await _service.GetTaskById(It.IsAny<int>());
         
         // assert
         result.Should().BeOfType<BadRequest<string>>();
     }
 
     [Test]
-    public async Task GetCompleteTasks_ReturnsOk_WhenTasksReturnedFromRepo()
+    public async Task GetCompleteTasks_ReturnsOk_WhenGetCompleteAsyncReturnsListOfTaskItems()
     {
         // arrange
         _mockRepo.Setup(r => r.GetCompleteAsync()).ReturnsAsync(new List<TaskItem>
@@ -216,7 +209,7 @@ public class UnitTests
     }
 
     [Test]
-    public async Task GetCompleteTasks_ReturnsBadRequest_WhenNoTasksReturnedFromRepo()
+    public async Task GetCompleteTasks_ReturnsBadRequest_WhenGetCompleteAsyncReturnsEmptyList()
     {
         // arrange
         _mockRepo.Setup(r => r.GetCompleteAsync()).ReturnsAsync(new List<TaskItem>());
@@ -229,21 +222,12 @@ public class UnitTests
     }
 
     [Test]
-    public async Task AddTask_ReturnsCreated_WhenValidTaskGiven()
+    public async Task AddTask_ReturnsCreated_WhenValidatorReturnsTrue()
     {
         // arrange
-        var task = new TaskItem
-        {
-            Id = 1,
-            Title = "title",
-            Description = null,
-            Status = false,
-            Priority = null,
-            DueDate = null,
-            CreatedAt = new DateTime(),
-            UpdatedAt = null
-        };
+        var task = new TaskItem();
         _mockRepo.Setup(r => r.AddAsync(task)).Returns(Task.CompletedTask);
+        _mockValidator.Setup(v => v.ValidateAsync(task, CancellationToken.None)).ReturnsAsync(new ValidationResult());
         
         // act
         var result = await _service.AddTask(task);
@@ -251,17 +235,72 @@ public class UnitTests
         // assert
         result.Should().BeOfType<Created<TaskItem>>();
     }
+
+    [Test]
+    public async Task AddTask_ReturnsValidationProblem_WhenValidatorReturnsValidationFailure()
+    {
+        // arrange
+        var task = new TaskItem();
+        _mockRepo.Setup(r => r.AddAsync(task)).Returns(Task.CompletedTask);
+        _mockValidator.Setup(v => v.ValidateAsync(task, CancellationToken.None))
+            .ReturnsAsync(new ValidationResult(new[] { new ValidationFailure("property", "error") }));
+        
+        // act
+        var result = await _service.AddTask(task);
+        
+        // assert
+        result.Should().BeOfType<ValidationProblem>();
+    }
+
+    [Test]
+    public async Task UpdateTask_ReturnsBadRequest_WhenGetByIdAsyncReturnsNull()
+    {
+        // arrange
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((TaskItem)null);
+
+        // act
+        var result = await _service.UpdateTask(It.IsAny<int>(), new TaskItem());
+
+        // assert
+        result.Should().BeOfType<BadRequest<string>>();
+    }
+
+    [Test]
+    public async Task UpdateTask_ReturnsNoContent_WhenGetByIdAsyncReturnsTaskItem()
+    {
+        // arrange
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((new TaskItem()));
+
+        // act
+        var result = await _service.UpdateTask(It.IsAny<int>(), new TaskItem());
+
+        // assert
+        result.Should().BeOfType<NoContent>();
+    }
+
+    [Test]
+    public async Task DeleteTask_ReturnsBadRequest_WhenGetByIdAsyncReturnsNull()
+    {
+        // arrange
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((TaskItem)null);
+
+        // act
+        var result = await _service.DeleteTask(It.IsAny<int>());
+
+        // assert
+        result.Should().BeOfType<BadRequest<string>>();
+    }
     
+    [Test]
+    public async Task DeleteTask_ReturnsNoContent_WhenGetByIdAsyncReturnsTaskItem()
+    {
+        // arrange
+        _mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(new TaskItem());
 
+        // act
+        var result = await _service.DeleteTask(It.IsAny<int>());
 
-
-
-
-
-
-
-
-
-
-
+        // assert
+        result.Should().BeOfType<NoContent>();
+    }
 }
