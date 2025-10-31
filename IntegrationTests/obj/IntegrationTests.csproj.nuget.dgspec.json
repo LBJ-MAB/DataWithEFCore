@@ -363,6 +363,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[35.6.5, )"
+            },
             "FluentAssertions": {
               "target": "Package",
               "version": "[8.8.0, )"

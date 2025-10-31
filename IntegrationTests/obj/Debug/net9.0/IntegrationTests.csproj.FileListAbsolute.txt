@@ -485,3 +485,4 @@ C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\IntegrationTests\obj\Debug
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\IntegrationTests\obj\Debug\net9.0\IntegrationTests.genruntimeconfig.cache
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\IntegrationTests\obj\Debug\net9.0\ref\IntegrationTests.dll
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\IntegrationTests\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\IntegrationTests\bin\Debug\net9.0\Bogus.dll
