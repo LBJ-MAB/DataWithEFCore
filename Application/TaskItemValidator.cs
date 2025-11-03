@@ -1,6 +1,7 @@
+using Domain;
 using FluentValidation;
 
-namespace Domain;
+namespace Application;
 
 public class TaskItemValidator : AbstractValidator<TaskItem>
 {
