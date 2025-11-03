@@ -1,7 +1,6 @@
 ﻿using Domain;
 using FluentValidation;
 using FluentValidation.Results;
-using Infrastructure;
 using Microsoft.AspNetCore.Http;
 
 namespace Application;
