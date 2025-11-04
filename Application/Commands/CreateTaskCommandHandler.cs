@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Commands;
 
-internal sealed class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, int>
+public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, int>
 {
     private readonly ITaskRepository _repo;
 
