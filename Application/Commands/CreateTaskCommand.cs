@@ -10,4 +10,4 @@ public sealed record CreateTaskCommand(
     int? Priority,
     DateTime? DueDate,
     DateTime CreatedAt,
-    DateTime? UpdatedAt) : IRequest;
+    DateTime? UpdatedAt) : IRequest<int>;
