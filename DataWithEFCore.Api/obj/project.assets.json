@@ -4843,6 +4843,7 @@
     "net9.0": [
       "Application >= 1.0.0",
       "Infrastructure >= 1.0.0",
+      "MediatR >= 13.1.0",
       "Microsoft.EntityFrameworkCore >= 9.0.10",
       "Swashbuckle.AspNetCore >= 6.6.2"
     ]
@@ -4897,6 +4898,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "MediatR": {
+            "target": "Package",
+            "version": "[13.1.0, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[9.0.10, )"

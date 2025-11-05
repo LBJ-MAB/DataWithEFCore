@@ -2559,6 +2559,7 @@
         "dependencies": {
           "Application": "1.0.0",
           "Infrastructure": "1.0.0",
+          "MediatR": "13.1.0",
           "Microsoft.EntityFrameworkCore": "9.0.10",
           "Swashbuckle.AspNetCore": "6.6.2"
         },
