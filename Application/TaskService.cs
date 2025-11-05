@@ -1,6 +1,7 @@
 ﻿using Domain;
 using FluentValidation;
 using FluentValidation.Results;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace Application;
@@ -23,6 +24,7 @@ public class TaskService : ITaskService
         {
             return TypedResults.ValidationProblem(validationResult.ToDictionary());
         }
+
         await _repo.AddAsync(task);
         return TypedResults.Created($"/tasks/{task.Id}", task);
     }
