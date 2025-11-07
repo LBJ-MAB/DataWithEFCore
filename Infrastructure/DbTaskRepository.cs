@@ -18,17 +18,17 @@ public class DbTaskRepository : ITaskRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<TaskItem>> GetAllAsync()
+    public async Task<List<TaskItem>?> GetAllAsync()
     {
         return await _context.Tasks.ToListAsync();
     }
 
-    public async Task<TaskItem> GetByIdAsync(int id)
+    public async Task<TaskItem?> GetByIdAsync(int id)
     {
         return await _context.Tasks.FindAsync(id);
     }
 
-    public async Task<List<TaskItem>> GetCompleteAsync()
+    public async Task<List<TaskItem>?> GetCompleteAsync()
     {
         return await _context.Tasks.Where(t => t.Status).ToListAsync();
     }

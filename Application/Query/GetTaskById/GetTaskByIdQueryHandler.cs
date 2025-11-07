@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Query.GetTaskById;
 
-public class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, IResult>
+public class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, TaskItem?>
 {
     private readonly ITaskRepository _repo;
 
@@ -13,14 +13,9 @@ public class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, IResult
         _repo = repo;
     }
 
-    public async Task<IResult> Handle(GetTaskByIdQuery request, CancellationToken cancellationToken)
+    public async Task<TaskItem?> Handle(GetTaskByIdQuery query, CancellationToken cancellationToken)
     {
-        var taskItem = await _repo.GetByIdAsync(request.Id);
         // use AutoMapper to map from TaskItem to DTO
-        if (taskItem is null)
-        {
-            return TypedResults.BadRequest($"could not find task with id {request.Id}");
-        }
-        return TypedResults.Ok(taskItem);
+        return await _repo.GetByIdAsync(query.Id);
     }
 }

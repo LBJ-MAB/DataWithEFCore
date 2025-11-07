@@ -16,3 +16,5 @@ C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Infrastructure\obj\Debug\n
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Infrastructure\obj\Debug\net9.0\Infrastructure.genruntimeconfig.cache
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Infrastructure\obj\Debug\net9.0\ref\Infrastructure.dll
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Infrastructure\obj\Debug\net9.0\Infrastructure.sourcelink.json
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Infrastructure\bin\Debug\net9.0\Application.dll
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Infrastructure\bin\Debug\net9.0\Application.pdb

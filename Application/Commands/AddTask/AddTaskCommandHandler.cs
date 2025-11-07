@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Commands.AddTask;
 
-public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, IResult>
+public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, TaskItem?>
 {
     private readonly ITaskRepository _repo;
     private IValidator<TaskItem> _validator;
@@ -19,23 +19,23 @@ public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, IResult>
         _validator = validator;
     }
     
-    public async Task<IResult> Handle(AddTaskCommand request, CancellationToken cancellationToken)
+    public async Task<TaskItem?> Handle(AddTaskCommand command, CancellationToken cancellationToken)
     {
         // use AutoMapper here from DTO -> TaskItem
         var taskItem = new TaskItem
         {
-            Title = request.Title,
-            Status = request.Status,
+            Title = command.InputTask.Title,
+            Status = command.InputTask.Status,
             CreatedAt = DateTime.UtcNow
         };
         
         ValidationResult validationResult = await _validator.ValidateAsync(taskItem);
         if (!validationResult.IsValid)
         {
-            return TypedResults.ValidationProblem(validationResult.ToDictionary());
+            return null;
         }
 
         await _repo.AddAsync(taskItem);
-        return TypedResults.Created($"/tasks/{taskItem.Id}", taskItem);
+        return taskItem;
     }
 }
