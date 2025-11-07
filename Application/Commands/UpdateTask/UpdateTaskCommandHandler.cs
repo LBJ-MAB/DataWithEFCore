@@ -19,6 +19,11 @@ public class UpdateTaskCommandHandler : IRequestHandler<UpdateTaskCommand, TaskI
         {
             return null;
         }
+        
+        // might need mapping from DTO to taskItem here as well
+        // the command should have DTO not task Item
+        // that way we only overwrite the properties shared with the DTO - won't need createdAt anymore
+        // set UpdatedAt date separately
 
         task.Title = command.InputTask.Title;
         task.Description = command.InputTask.Description;

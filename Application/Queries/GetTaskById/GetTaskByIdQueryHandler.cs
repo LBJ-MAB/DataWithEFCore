@@ -2,7 +2,7 @@ using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace Application.Query.GetTaskById;
+namespace Application.Queries.GetTaskById;
 
 public class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, TaskItem?>
 {

@@ -1,7 +1,7 @@
 using Domain;
 using MediatR;
 
-namespace Application.Query.GetCompleteTasks;
+namespace Application.Queries.GetCompleteTasks;
 
 public class GetCompleteTasksQueryHandler : IRequestHandler<GetCompleteTasksQuery, List<TaskItem>?>
 {
