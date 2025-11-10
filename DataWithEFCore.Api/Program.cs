@@ -24,6 +24,7 @@ builder.Services.AddDbContext<TaskDb>(opt =>
      opt.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TaskDB;Trusted_Connection=True;"));
 builder.Services.AddScoped<ITaskRepository, DbTaskRepository>();
 builder.Services.AddScoped<IValidator<TaskItem>, AddTaskValidator>();
+builder.Services.AddScoped<IValidator<TaskItemDto>, UpdateTaskValidator>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetTaskByIdQueryHandler).Assembly));
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
@@ -59,7 +60,7 @@ tasks.MapPut("/{id}", async (ISender sender, int id, [FromBody] TaskItemDto inpu
 {
     var command = new UpdateTaskCommand(id, inputTaskDto);
     var result = await sender.Send(command);
-    return result is null ? Results.NotFound() : Results.NoContent();
+    return result.Success ? Results.NoContent() : result.NotFound ? Results.NotFound() : Results.ValidationProblem(result.Errors!);
 });
 tasks.MapDelete("/{id}", async (ISender sender, int id) =>
 {

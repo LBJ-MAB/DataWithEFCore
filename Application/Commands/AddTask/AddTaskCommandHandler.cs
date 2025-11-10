@@ -26,7 +26,7 @@ public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, AddTaskResu
     {
         var taskItem = _mapper.Map<TaskItem>(command.TaskItemDto);
         
-        ValidationResult validationResult = await _validator.ValidateAsync(taskItem);
+        var validationResult = await _validator.ValidateAsync(taskItem);
         if (!validationResult.IsValid)
         {
             return new AddTaskResult{ Errors = validationResult.ToDictionary() };

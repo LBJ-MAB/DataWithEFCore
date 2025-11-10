@@ -6,4 +6,4 @@ namespace Application.Commands.UpdateTask;
 
 public record UpdateTaskCommand(
     int Id,
-    TaskItemDto InputTaskDto) : IRequest<TaskItem?>;
+    TaskItemDto InputTaskDto) : IRequest<UpdateTaskResult>;
