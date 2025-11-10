@@ -7,6 +7,7 @@ using Application.Mapping;
 using Application.Queries.GetAllTasks;
 using Application.Queries.GetCompleteTasks;
 using Application.Queries.GetTaskById;
+using Application.Validation;
 using AutoMapper;
 using Domain;
 using FluentValidation;
@@ -22,7 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TaskDb>(opt => 
      opt.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TaskDB;Trusted_Connection=True;"));
 builder.Services.AddScoped<ITaskRepository, DbTaskRepository>();
-builder.Services.AddScoped<IValidator<TaskItem>, TaskItemValidator>();
+builder.Services.AddScoped<IValidator<TaskItem>, AddTaskValidator>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetTaskByIdQueryHandler).Assembly));
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
@@ -34,7 +35,7 @@ tasks.MapPost("/", async ([FromBody] TaskItemDto taskItemDto, ISender sender) =>
 {
     var command = new AddTaskCommand(taskItemDto);
     var result = await sender.Send(command);
-    return result is null ? Results.BadRequest() : Results.Created($"/tasks/{result.Id}", result);
+    return result.Success ? Results.Created($"/tasks/{result.TaskItem!.Id}", result) : Results.ValidationProblem(result.Errors!);
 });
 tasks.MapGet("/{id}", async (int id, ISender sender) =>
 {
@@ -54,9 +55,9 @@ tasks.MapGet("/complete", async (ISender sender) =>
     var result = await sender.Send(query);
     return result is null ? Results.NotFound() : Results.Ok(result);
 });
-tasks.MapPut("/{id}", async (ISender sender, int id, [FromBody] TaskItem inputTask) =>
+tasks.MapPut("/{id}", async (ISender sender, int id, [FromBody] TaskItemDto inputTaskDto) =>
 {
-    var command = new UpdateTaskCommand(id, inputTask);
+    var command = new UpdateTaskCommand(id, inputTaskDto);
     var result = await sender.Send(command);
     return result is null ? Results.NotFound() : Results.NoContent();
 });

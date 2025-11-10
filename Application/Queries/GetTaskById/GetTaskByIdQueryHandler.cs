@@ -1,21 +1,23 @@
-using Domain;
+using Application.Dtos;
+using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 
 namespace Application.Queries.GetTaskById;
 
-public class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, TaskItem?>
+public class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, TaskItemDto?>
 {
     private readonly ITaskRepository _repo;
+    private readonly IMapper _mapper;
 
-    public GetTaskByIdQueryHandler(ITaskRepository repo)
+    public GetTaskByIdQueryHandler(ITaskRepository repo, IMapper mapper)
     {
         _repo = repo;
+        _mapper = mapper;
     }
 
-    public async Task<TaskItem?> Handle(GetTaskByIdQuery query, CancellationToken cancellationToken)
+    public async Task<TaskItemDto?> Handle(GetTaskByIdQuery query, CancellationToken cancellationToken)
     {
-        // use AutoMapper to map from TaskItem to DTO
-        return await _repo.GetByIdAsync(query.Id);
+        var task = await _repo.GetByIdAsync(query.Id);
+        return _mapper.Map<TaskItemDto>(task);
     }
 }

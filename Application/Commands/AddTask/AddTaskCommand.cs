@@ -5,4 +5,4 @@ using MediatR;
 namespace Application.Commands.AddTask;
 
 public sealed record AddTaskCommand(
-    TaskItemDto TaskItemDto) : IRequest<TaskItem?>;
+    TaskItemDto TaskItemDto) : IRequest<AddTaskResult>;

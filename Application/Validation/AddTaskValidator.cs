@@ -1,13 +1,12 @@
 using Domain;
 using FluentValidation;
 
-namespace Application;
+namespace Application.Validation;
 
-public class TaskItemValidator : AbstractValidator<TaskItem>
+public class AddTaskValidator : AbstractValidator<TaskItem>
 {
-    public TaskItemValidator()
+    public AddTaskValidator()
     {
-        RuleFor(task => task.Id).NotNull();
         RuleFor(task => task.Title).NotNull().Length(1, 30);
         RuleFor(task => task.Title).NotEmpty();
         RuleFor(task => task.Status).Equal(false);

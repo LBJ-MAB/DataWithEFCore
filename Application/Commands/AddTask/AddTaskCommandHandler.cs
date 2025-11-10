@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.Commands.AddTask;
 
-public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, TaskItem?>
+public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, AddTaskResult>
 {
     private readonly ITaskRepository _repo;
     private IValidator<TaskItem> _validator;
@@ -22,19 +22,19 @@ public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, TaskItem?>
         _mapper = mapper;
     }
     
-    public async Task<TaskItem?> Handle(AddTaskCommand command, CancellationToken cancellationToken)
+    public async Task<AddTaskResult> Handle(AddTaskCommand command, CancellationToken cancellationToken)
     {
         var taskItem = _mapper.Map<TaskItem>(command.TaskItemDto);
         
         ValidationResult validationResult = await _validator.ValidateAsync(taskItem);
         if (!validationResult.IsValid)
         {
-            return null;
+            return new AddTaskResult{ Errors = validationResult.ToDictionary() };
         }
         
         taskItem.CreatedAt = DateTime.UtcNow;
 
         await _repo.AddAsync(taskItem);
-        return taskItem;
+        return new AddTaskResult { TaskItem = taskItem } ;
     }
 }
