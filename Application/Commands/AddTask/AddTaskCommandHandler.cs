@@ -35,6 +35,6 @@ public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, AddTaskResu
         taskItem.CreatedAt = DateTime.UtcNow;
 
         await _repo.AddAsync(taskItem);
-        return new AddTaskResult { TaskItem = taskItem } ;
+        return new AddTaskResult{ TaskItem = taskItem } ;
     }
 }

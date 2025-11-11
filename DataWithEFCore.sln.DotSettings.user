@@ -38,6 +38,15 @@
     &lt;/And&gt;&#xD;
     &lt;TestAncestor&gt;&#xD;
       &lt;TestId&gt;NUnit3x::9EA977AF-F7BF-4296-9231-556C9C0CBCFF::net9.0::IntegrationTests.IntegrationTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.AddTaskCommandHandler_ShouldReturnAddTaskResultType&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.AddTaskCommandHandler_ShouldReturnErrors_WhenInvalidTaskGiven&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.AddTaskCommandHandler_ShouldReturnUnsuccessful_WhenValidationFails&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.AddTaskCommandHandler_ShouldReturnSuccessful_WhenValidationPasses&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.DeleteTaskCommandHandler_ShouldReturnFalse_WhenRepoReturnsNull&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.DeleteTaskCommandHandler_ShouldReturnTrue_WhenRepoReturnsTaskItem&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.UpdateTaskCommandHandler_ShouldReturnFoundButUnsuccessful_WhenValidationFails&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.UpdateTaskCommandHandler_ShouldReturnNotFoundAndUnsuccessful_WhenRepoReturnsNull&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.UpdateTaskCommandHandler_ShouldReturnSuccessful_WhenRepoReturnsTaskItemAndValidationPasses&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
   &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String>

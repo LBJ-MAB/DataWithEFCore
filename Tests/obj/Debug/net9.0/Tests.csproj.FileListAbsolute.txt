@@ -164,3 +164,8 @@ C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\Dom
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\obj\Debug\net9.0\Tests.sourcelink.json
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\Castle.Core.dll
 C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\Moq.dll
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\AutoMapper.dll
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\MediatR.dll
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\MediatR.Contracts.dll
+C:\Users\Laurie.bassett-jones\Projects\DataWithEFCore\Tests\bin\Debug\net9.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
