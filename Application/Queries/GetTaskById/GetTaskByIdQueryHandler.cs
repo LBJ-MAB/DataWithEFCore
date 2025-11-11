@@ -18,6 +18,10 @@ public class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, TaskIte
     public async Task<TaskItemDto?> Handle(GetTaskByIdQuery query, CancellationToken cancellationToken)
     {
         var task = await _repo.GetByIdAsync(query.Id);
+        if (task is null)
+        {
+            return null;
+        }
         return _mapper.Map<TaskItemDto>(task);
     }
 }

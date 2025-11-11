@@ -47,6 +47,12 @@
       &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.UpdateTaskCommandHandler_ShouldReturnFoundButUnsuccessful_WhenValidationFails&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.UpdateTaskCommandHandler_ShouldReturnNotFoundAndUnsuccessful_WhenRepoReturnsNull&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.CommandHandlerUnitTests.UpdateTaskCommandHandler_ShouldReturnSuccessful_WhenRepoReturnsTaskItemAndValidationPasses&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.QueryHandlerTests.GetAllTasksQueryHandler_ShouldReturnNull_WhenRepoReturnsNull&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.QueryHandlerTests.GetAllTasksQueryHandler_ShouldReturnDtoList_WhenRepoReturnsTaskItemList&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.QueryHandlerTests.GetCompleteTasksQueryHandler_ShouldReturnNull_WhenRepoReturnsNull&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.QueryHandlerTests.GetCompleteTasksQueryHandler_ShouldReturnDtoList_WhenRepoReturnsTaskItemList&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.QueryHandlerTests.GetTaskByIdQueryHandler_ShouldReturnNull_WhenRepoReturnsNull&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::45AD2C11-DBBF-4A9C-936B-E53B14CCD03B::net9.0::Tests.QueryHandlerTests.GetTaskByIdQueryHandler_ShouldReturnTaskItemDto_WhenRepoReturnsTaskItem&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
   &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
