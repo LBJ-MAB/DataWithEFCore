@@ -3,7 +3,6 @@ using Domain;
 using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using Infrastructure;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
 

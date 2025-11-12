@@ -23,6 +23,7 @@ public class TaskService : ITaskService
         {
             return TypedResults.ValidationProblem(validationResult.ToDictionary());
         }
+
         await _repo.AddAsync(task);
         return TypedResults.Created($"/tasks/{task.Id}", task);
     }
